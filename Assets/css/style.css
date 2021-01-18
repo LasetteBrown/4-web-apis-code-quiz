@@ -1,0 +1,36 @@
+
+body {
+    background: url("../images/joshua-sortino-LqKhnDzSF-8-unsplash.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+header {
+    background-color: black;
+}
+
+#page-title {
+    text-align:center; 
+    color: black;
+    -webkit-text-fill-color: cornsilk; 
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
+}
+
+.card {
+    background-color: black;
+    color: cornsilk;
+    align-items: center; 
+    padding: 20px;
+    margin: 20px;
+    margin-top: 40%;
+    border-color: blanchedalmond; 
+}
+
+@media screen and (max-width: 200px){
+    body {
+        display:none;
+     }
+}
