@@ -1,7 +1,25 @@
 console.log("There are four lights!")
 
-//create a start button 
+
+var gameCard = document.getElementById("game-card");
+var questionTitle = document.getElementById("question-title");
+var questionDiv = document.getElementById("question-div");
+var questionP = document.getElementById("question-paragraph");
+
+//create a start button
+var startButton = document.createElement("button");
+startButton.setAttribute("type", "button");
+startButton.setAttribute("class", "btn btn-warning");
+startButton.textContent = "START";
+questionDiv.appendChild(startButton);
+
+
 //event listener: click on start
+startButton.addEventListener("click", function () {
+
+})
+
+
 //when start is clicked
 // THEN a timer starts : setinterval
     //display time left somewhere on the screen
