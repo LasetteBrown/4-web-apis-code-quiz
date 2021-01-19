@@ -5,6 +5,7 @@ var gameCard = document.getElementById("game-card");
 var questionTitle = document.getElementById("question-title");
 var questionDiv = document.getElementById("question-div");
 var questionP = document.getElementById("question-paragraph");
+var timeRemaining = document.getElementById("time-remaining")
 
 //create a start button
 var startButton = document.createElement("button");
@@ -13,9 +14,27 @@ startButton.setAttribute("class", "btn btn-warning");
 startButton.textContent = "START";
 questionDiv.appendChild(startButton);
 
+//create a timer 
+var secondsLeft = 20;
 
+function startTimer() {
+    // Sets interval in variable
+    var timerInterval = setInterval(function () {
+        secondsLeft--;
+        timeRemaining.textContent = "Time Remaining: " + secondsLeft;
+
+        if (secondsLeft === 0) {
+            // Stops execution of action at set interval
+            clearInterval(timerInterval);
+            // Calls function to create and append image
+            // sendMessage();
+        }
+
+    }, 1000);
+}
 //event listener: click on start
 startButton.addEventListener("click", function () {
+    startTimer()
 
 })
 
