@@ -49,7 +49,11 @@ function runGame(event) {
         choiceB: "King Aurthur",
         choiceC: "Sir Robin",
         choiceD: "Galihad",
+<<<<<<< HEAD
         correctAnswer: "King Aurthur",
+=======
+        // correctAnswer: choiceB
+>>>>>>> 7fd7445fd3b12cc0e0ee90b8c332ceaca3a9991f
     }
 
     var qTwo = {
@@ -58,7 +62,11 @@ function runGame(event) {
         choiceB: "To fart in your general direction",
         choiceC: "To mock you a second time",
         choiceD: "To run away",
+<<<<<<< HEAD
         correctAnswer: "To find the Holy Grail",
+=======
+        // correctAnswer: choiceA
+>>>>>>> 7fd7445fd3b12cc0e0ee90b8c332ceaca3a9991f
     }
 
     var qThree = {
@@ -67,7 +75,11 @@ function runGame(event) {
         choiceB: "Purple",
         choiceC: "Green",
         choiceD: "Blue",
+<<<<<<< HEAD
         correctAnswer: "Blue",
+=======
+        // correctAnswer: choiceD
+>>>>>>> 7fd7445fd3b12cc0e0ee90b8c332ceaca3a9991f
 
     }
     var quizQuestions = [qOne, qTwo, qThree]
@@ -100,11 +112,15 @@ function runGame(event) {
         liB.textContent = quizQuestions[i].choiceB
         liC.textContent = quizQuestions[i].choiceC
         liD.textContent = quizQuestions[i].choiceD
+<<<<<<< HEAD
         // questionDiv.addEventListener("click", function () {
         //     if (event.matches("li")) {
         //         console.log(event)
         //     }
         // })
+=======
+
+>>>>>>> 7fd7445fd3b12cc0e0ee90b8c332ceaca3a9991f
         i++
     }
 }
