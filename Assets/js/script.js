@@ -16,6 +16,8 @@ questionDiv.appendChild(startButton);
 
 var secondsLeft = 20;
 
+var score = 0;
+
 //create a timer 
 function startTimer() {
     questionDiv.removeChild(startButton)
@@ -36,7 +38,7 @@ function startTimer() {
 
     }, 1000);
     return secondsLeft;
-}
+};
 
 //when start is clicked
 function runGame(event) {
@@ -49,11 +51,7 @@ function runGame(event) {
         choiceB: "King Aurthur",
         choiceC: "Sir Robin",
         choiceD: "Galihad",
-<<<<<<< HEAD
         correctAnswer: "King Aurthur",
-=======
-        // correctAnswer: choiceB
->>>>>>> 7fd7445fd3b12cc0e0ee90b8c332ceaca3a9991f
     }
 
     var qTwo = {
@@ -62,11 +60,7 @@ function runGame(event) {
         choiceB: "To fart in your general direction",
         choiceC: "To mock you a second time",
         choiceD: "To run away",
-<<<<<<< HEAD
         correctAnswer: "To find the Holy Grail",
-=======
-        // correctAnswer: choiceA
->>>>>>> 7fd7445fd3b12cc0e0ee90b8c332ceaca3a9991f
     }
 
     var qThree = {
@@ -75,11 +69,7 @@ function runGame(event) {
         choiceB: "Purple",
         choiceC: "Green",
         choiceD: "Blue",
-<<<<<<< HEAD
         correctAnswer: "Blue",
-=======
-        // correctAnswer: choiceD
->>>>>>> 7fd7445fd3b12cc0e0ee90b8c332ceaca3a9991f
 
     }
     var quizQuestions = [qOne, qTwo, qThree]
@@ -89,46 +79,86 @@ function runGame(event) {
     var liB = document.createElement("li")
     var liC = document.createElement("li")
     var liD = document.createElement("li")
+    var feedback = document.createElement("p")
 
     olEl.setAttribute("type", "A")
     liA.setAttribute("style", "background-color:goldenrod;")
     liB.setAttribute("style", "background-color:goldenrod;")
     liC.setAttribute("style", "background-color:goldenrod;")
     liD.setAttribute("style", "background-color:goldenrod;")
-
+    feedback.setAttribute("style", "color:darkgray")
 
     questionDiv.appendChild(olEl)
     olEl.appendChild(liA)
     olEl.appendChild(liB)
     olEl.appendChild(liC)
     olEl.appendChild(liD)
+    questionDiv.appendChild(feedback)
 
-    var i = 0;
-
-    while (i < quizQuestions.length && time > 0) {
+    function askQuestion(i) {
         questionTitle.textContent = "Question " + (i + 1);
         questionP.textContent = quizQuestions[i].question;
         liA.textContent = quizQuestions[i].choiceA
         liB.textContent = quizQuestions[i].choiceB
         liC.textContent = quizQuestions[i].choiceC
         liD.textContent = quizQuestions[i].choiceD
-<<<<<<< HEAD
-        // questionDiv.addEventListener("click", function () {
-        //     if (event.matches("li")) {
-        //         console.log(event)
-        //     }
-        // })
-=======
 
->>>>>>> 7fd7445fd3b12cc0e0ee90b8c332ceaca3a9991f
-        i++
+        liA.addEventListener("click", function () {
+            if (quizQuestions[i].choiceA === quizQuestions[i].correctAnswer) {
+                feedback.textContent = "Correct"
+                score++
+
+            } else {
+                feedback.textContent = "Wrong"
+                secondsLeft = secondsLeft - 10
+
+            }
+        })
+        liB.addEventListener("click", function () {
+            if (quizQuestions[i].choiceB === quizQuestions[i].correctAnswer) {
+                feedback.textContent = "Correct"
+                score++
+
+            } else {
+                feedback.textContent = "Wrong"
+                secondsLeft = secondsLeft - 10
+
+            }
+        })
+        liC.addEventListener("click", function () {
+            if (quizQuestions[i].choiceC === quizQuestions[i].correctAnswer) {
+                feedback.textContent = "Correct"
+                score++
+
+            } else {
+                feedback.textContent = "Wrong"
+                secondsLeft = secondsLeft - 10
+
+            }
+        })
+        liD.addEventListener("click", function () {
+            if (quizQuestions[i].choiceD === quizQuestions[i].correctAnswer) {
+                feedback.textContent = "Correct"
+                score++
+
+            } else {
+                feedback.textContent = "Wrong"
+                secondsLeft = secondsLeft - 10
+
+            }
+        })
+
     }
-}
+
+    for (var i = 0; i < quizQuestions.length; i++) {
+        askQuestion(i)
+    }
+};
 
 
 
 //event listener: click on start
-startButton.addEventListener("click", runGame)
+startButton.addEventListener("click", runGame);
 
 
 // and I am presented with a question (for loop?): 

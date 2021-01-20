@@ -29,8 +29,16 @@ header {
     border-color: blanchedalmond; 
 }
 
+#high-scores-box {
+    margin-top: 10%;
+    background-color: cornsilk;
+    color:rgb(20, 0, 2);
+    align-items: center;
+    text-align: center;
+}
+
 @media screen and (max-width: 200px){
     body {
         display:none;
-     }
+    }
 }
