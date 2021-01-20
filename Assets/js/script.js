@@ -190,7 +190,7 @@ function runGame() {
         }
         else {
             console.log("game over")
-
+            secondsLeft = 0
         }
     }
     askQuestion(i)
