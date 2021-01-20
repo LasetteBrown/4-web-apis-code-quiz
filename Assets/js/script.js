@@ -17,18 +17,22 @@ questionDiv.appendChild(startButton);
 var secondsLeft = 200;
 
 var score = 0;
+var allScores = []
+// localStorage.getItem("scores", JSON.parse(allScores))
+
 
 function storeScores() {
 
     var initials = window.prompt("What are your initials?")
-    console.log(initials)
+
     var userScore = {
         initials: initials,
         score: score,
     }
-    console.log(userScore)
 
-    localStorage.setItem("scores", JSON.stringify(userScore));
+    allScores.push(userScore)
+
+    localStorage.setItem("scores", JSON.stringify(allScores));
 
     if (initials = true) {
         window.location.href = "highscores.html"
@@ -58,7 +62,7 @@ function startTimer() {
 };
 
 //when start is clicked
-function runGame(event) {
+function runGame() {
     // THEN a timer starts
     startTimer()
 
@@ -91,6 +95,9 @@ function runGame(event) {
     }
     var quizQuestions = [qOne, qTwo, qThree]
 
+    var i = 0
+
+
     var olEl = document.createElement("ol")
     var liA = document.createElement("li")
     var liB = document.createElement("li")
@@ -113,63 +120,80 @@ function runGame(event) {
     questionDiv.appendChild(feedback)
 
     function askQuestion(i) {
-        questionTitle.textContent = "Question " + (i + 1);
-        questionP.textContent = quizQuestions[i].question;
-        liA.textContent = quizQuestions[i].choiceA
-        liB.textContent = quizQuestions[i].choiceB
-        liC.textContent = quizQuestions[i].choiceC
-        liD.textContent = quizQuestions[i].choiceD
+        if (i < quizQuestions.length) {
+            questionTitle.textContent = "Question " + (i + 1);
+            questionP.textContent = quizQuestions[i].question;
+            liA.textContent = quizQuestions[i].choiceA
+            liB.textContent = quizQuestions[i].choiceB
+            liC.textContent = quizQuestions[i].choiceC
+            liD.textContent = quizQuestions[i].choiceD
 
-        liA.addEventListener("click", function () {
-            if (quizQuestions[i].choiceA === quizQuestions[i].correctAnswer) {
-                feedback.textContent = "Correct"
-                score++
+            liA.addEventListener("click", function () {
+                if (quizQuestions[i].choiceA === quizQuestions[i].correctAnswer) {
+                    feedback.textContent = "Correct";
+                    score++;
+                    i++
+                    return askQuestion(i);
+                } else {
+                    feedback.textContent = "Wrong";
+                    secondsLeft = secondsLeft - 10;
+                    i++
+                    return askQuestion(i);
+                }
+            })
+            liB.addEventListener("click", function () {
+                if (quizQuestions[i].choiceB === quizQuestions[i].correctAnswer) {
+                    feedback.textContent = "Correct"
+                    score++
+                    i++
+                    return askQuestion(i);
 
-            } else {
-                feedback.textContent = "Wrong"
-                secondsLeft = secondsLeft - 10
+                } else {
+                    feedback.textContent = "Wrong"
+                    secondsLeft = secondsLeft - 10
+                    i++
+                    return askQuestion(i);
 
-            }
-        })
-        liB.addEventListener("click", function () {
-            if (quizQuestions[i].choiceB === quizQuestions[i].correctAnswer) {
-                feedback.textContent = "Correct"
-                score++
+                }
+            })
+            liC.addEventListener("click", function () {
+                if (quizQuestions[i].choiceC === quizQuestions[i].correctAnswer) {
+                    feedback.textContent = "Correct"
+                    score++
+                    i++
+                    return askQuestion(i);
 
-            } else {
-                feedback.textContent = "Wrong"
-                secondsLeft = secondsLeft - 10
+                } else {
+                    feedback.textContent = "Wrong"
+                    secondsLeft = secondsLeft - 10
+                    i++
+                    return askQuestion(i);
 
-            }
-        })
-        liC.addEventListener("click", function () {
-            if (quizQuestions[i].choiceC === quizQuestions[i].correctAnswer) {
-                feedback.textContent = "Correct"
-                score++
+                }
+            })
+            liD.addEventListener("click", function () {
+                if (quizQuestions[i].choiceD === quizQuestions[i].correctAnswer) {
+                    feedback.textContent = "Correct"
+                    score++
+                    i++
+                    return askQuestion(i);
 
-            } else {
-                feedback.textContent = "Wrong"
-                secondsLeft = secondsLeft - 10
+                } else {
+                    feedback.textContent = "Wrong"
+                    secondsLeft = secondsLeft - 10
+                    i++
+                    return askQuestion(i);
 
-            }
-        })
-        liD.addEventListener("click", function () {
-            if (quizQuestions[i].choiceD === quizQuestions[i].correctAnswer) {
-                feedback.textContent = "Correct"
-                score++
+                }
+            })
 
-            } else {
-                feedback.textContent = "Wrong"
-                secondsLeft = secondsLeft - 10
+        }
+        else {
+            console.log("game over")
 
-            }
-        })
-
+        }
     }
-
-    for (var i = 0; i < quizQuestions.length; i++) {
-        askQuestion(i)
-    }
+    askQuestion(i)
 };
 
 
