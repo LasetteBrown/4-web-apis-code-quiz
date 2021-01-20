@@ -14,14 +14,18 @@ startButton.setAttribute("class", "btn btn-warning");
 startButton.textContent = "START";
 questionDiv.appendChild(startButton);
 
-//create a timer 
 var secondsLeft = 20;
 
+//create a timer 
 function startTimer() {
+    questionDiv.removeChild(startButton)
+    secondsLeft = 20
     // Sets interval in variable
     var timerInterval = setInterval(function () {
         secondsLeft--;
-        timeRemaining.textContent = "Time Remaining: " + secondsLeft;
+
+        //display time left somewhere on the screen
+        timeRemaining.textContent = secondsLeft;
 
         if (secondsLeft === 0) {
             // Stops execution of action at set interval
@@ -31,17 +35,82 @@ function startTimer() {
         }
 
     }, 1000);
+    return secondsLeft;
 }
-//event listener: click on start
-startButton.addEventListener("click", function () {
-    startTimer()
-
-})
-
 
 //when start is clicked
-// THEN a timer starts : setinterval
-    //display time left somewhere on the screen
+function runGame(event) {
+    // THEN a timer starts
+    var time = startTimer()
+
+    var qOne = {
+        question: "What is your name?",
+        choiceA: "Lancelot",
+        choiceB: "King Aurthur",
+        choiceC: "Sir Robin",
+        choiceD: "Galihad",
+        // correctAnswer: choiceB
+    }
+
+    var qTwo = {
+        question: "What is your quest?",
+        choiceA: "To find the Holy Grail",
+        choiceB: "To fart in your general direction",
+        choiceC: "To mock you a second time",
+        choiceD: "To run away",
+        // correctAnswer: choiceA
+    }
+
+    var qThree = {
+        question: "What is your favorite color?",
+        choiceA: "Red",
+        choiceB: "Purple",
+        choiceC: "Green",
+        choiceD: "Blue",
+        // correctAnswer: choiceD
+
+    }
+    var quizQuestions = [qOne, qTwo, qThree]
+
+    var olEl = document.createElement("ol")
+    var liA = document.createElement("li")
+    var liB = document.createElement("li")
+    var liC = document.createElement("li")
+    var liD = document.createElement("li")
+
+    olEl.setAttribute("type", "A")
+    liA.setAttribute("style", "background-color:goldenrod;")
+    liB.setAttribute("style", "background-color:goldenrod;")
+    liC.setAttribute("style", "background-color:goldenrod;")
+    liD.setAttribute("style", "background-color:goldenrod;")
+
+
+    questionDiv.appendChild(olEl)
+    olEl.appendChild(liA)
+    olEl.appendChild(liB)
+    olEl.appendChild(liC)
+    olEl.appendChild(liD)
+
+    var i = 0;
+
+    while (i < quizQuestions.length && time > 0) {
+        questionTitle.textContent = "Question " + (i + 1);
+        questionP.textContent = quizQuestions[i].question;
+        liA.textContent = quizQuestions[i].choiceA
+        liB.textContent = quizQuestions[i].choiceB
+        liC.textContent = quizQuestions[i].choiceC
+        liD.textContent = quizQuestions[i].choiceD
+
+        i++
+    }
+}
+
+
+
+//event listener: click on start
+startButton.addEventListener("click", runGame)
+
+
 // and I am presented with a question (for loop?): 
     // list of questions, multiple choice answers, one of which is correct answer (in an array?)
     // event listener?: select a multiple choice option
