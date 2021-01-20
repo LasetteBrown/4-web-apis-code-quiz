@@ -14,14 +14,31 @@ startButton.setAttribute("class", "btn btn-warning");
 startButton.textContent = "START";
 questionDiv.appendChild(startButton);
 
-var secondsLeft = 20;
+var secondsLeft = 200;
 
 var score = 0;
+
+function storeScores() {
+
+    var initials = window.prompt("What are your initials?")
+    console.log(initials)
+    var userScore = {
+        initials: initials,
+        score: score,
+    }
+    console.log(userScore)
+
+    localStorage.setItem("scores", JSON.stringify(userScore));
+
+    if (initials = true) {
+        window.location.href = "highscores.html"
+    }
+}
 
 //create a timer 
 function startTimer() {
     questionDiv.removeChild(startButton)
-    secondsLeft = 20
+    secondsLeft = 200
     // Sets interval in variable
     var timerInterval = setInterval(function () {
         secondsLeft--;
@@ -29,11 +46,11 @@ function startTimer() {
         //display time left somewhere on the screen
         timeRemaining.textContent = secondsLeft;
 
-        if (secondsLeft === 0) {
+        if (secondsLeft < 1) {
             // Stops execution of action at set interval
+            timeRemaining.textContent = "0";
             clearInterval(timerInterval);
-            // Calls function to create and append image
-            // sendMessage();
+            storeScores()
         }
 
     }, 1000);
@@ -43,7 +60,7 @@ function startTimer() {
 //when start is clicked
 function runGame(event) {
     // THEN a timer starts
-    var time = startTimer()
+    startTimer()
 
     var qOne = {
         question: "What is your name?",
