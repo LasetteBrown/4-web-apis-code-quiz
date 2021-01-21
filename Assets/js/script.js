@@ -1,55 +1,57 @@
+//making sure my JavaScript is linked properly
 console.log("There are four lights!")
 
-
-var gameCard = document.getElementById("game-card");
+// variables that link to areas of my html
 var questionTitle = document.getElementById("question-title");
-var questionDiv = document.getElementById("question-div");
 var questionP = document.getElementById("question-paragraph");
+var answersDiv = document.getElementById("answers-div");
+var feedbackP = document.getElementById("feedback-paragraph");
 var timeRemaining = document.getElementById("time-remaining")
+
+//global variables
+var secondsLeft = 300;
+var score = 0;
+var allScores = [];
 
 //create a start button
 var startButton = document.createElement("button");
 startButton.setAttribute("type", "button");
 startButton.setAttribute("class", "btn btn-warning");
 startButton.textContent = "START";
-questionDiv.appendChild(startButton);
+answersDiv.appendChild(startButton);
 
-var secondsLeft = 300;
-
-var score = 0;
-
-var allScores = [];
-// localStorage.getItem("scores", JSON.parse(allScores))
-
-
+// a function for the end of the game: collects initials, stores score, and redirects
 function storeScores() {
+    //telling the user that the game is over and asking them for their initials
+    var initials = window.prompt("What are your initials?")
 
-    var initials = window.prompt("GAME OVER: What are your initials?")
+    //make sure they have entered initials
+    if (initials === null) {
+        alert("Your initials will be used to record your score and rank. Please enter your initials.")
+        return storeScores()
 
-    // if (initials = null) {
-    //     initials = "Anonymous";
-    //     return;
-    // }
+        //if they have entered initials
+    } else {
+        //create an object to store their score and initials
+        var userScore = {
+            initials: initials,
+            score: score,
+        };
 
-    var userScore = {
-        initials: initials,
-        score: score,
-    };
+        //push their score into the allscores array
+        allScores.push(userScore);
 
-    allScores.push(userScore);
+        //store the array in local storage
+        localStorage.setItem("scores", JSON.stringify(allScores));
 
-    localStorage.setItem("scores", JSON.stringify(allScores));
-
-
-
-    if (initials = true) {
+        //and redirect to the high scores page
         window.location.href = "highscores.html"
-    };
+    }
 };
 
-//create a timer 
+//timer function 
 function startTimer() {
-    questionDiv.removeChild(startButton);
+    answersDiv.removeChild(startButton);
     secondsLeft = 300;
     // Sets interval in variable
     var timerInterval = setInterval(function () {
@@ -59,7 +61,7 @@ function startTimer() {
         timeRemaining.textContent = secondsLeft;
 
         if (secondsLeft < 1) {
-            // Stops execution of action at set interval
+            // Stops execution of action at end of game
             timeRemaining.textContent = "0";
             clearInterval(timerInterval);
             storeScores();
@@ -74,156 +76,104 @@ function runGame() {
     // THEN a timer starts
     startTimer();
 
+    //store each question into an object variable
     var qOne = {
         question: "What is your name?",
-        choiceA: "Lancelot",
-        choiceB: "King Aurthur",
-        choiceC: "Sir Robin",
-        choiceD: "Galihad",
+        choices: ["Lancelot",
+            "King Aurthur",
+            "Sir Robin",
+            "Galihad"],
         correctAnswer: "King Aurthur",
     };
-
     var qTwo = {
         question: "What is your quest?",
-        choiceA: "To find the Holy Grail",
-        choiceB: "To fart in your general direction",
-        choiceC: "To mock you a second time",
-        choiceD: "To run away",
+        choices: ["To find the Holy Grail",
+            "To fart in your general direction",
+            "To mock you a second time",
+            "To run away"],
         correctAnswer: "To find the Holy Grail",
     };
-
     var qThree = {
         question: "What is your favorite color?",
-        choiceA: "Red",
-        choiceB: "Purple",
-        choiceC: "Green",
-        choiceD: "Blue",
+        choices: ["Red",
+            "Purple",
+            "Green",
+            "Blue"],
         correctAnswer: "Blue",
 
     };
+
+    //place all questions into an array
     var quizQuestions = [qOne, qTwo, qThree];
+    //a variable for indexing the array
+    var currentQuestion = 0;
 
-    var i = 0;
+    //displays question 
+    function askQuestion(currentQuestion) {
+        if (currentQuestion < quizQuestions.length) {
+
+            //clears previously input information
+            answersDiv.innerHTML = "";
+
+            //question number is displayed
+            questionTitle.textContent = "Question " + (currentQuestion + 1);
+
+            //question is displayed
+            questionP.textContent = quizQuestions[currentQuestion].question;
 
 
-    var olEl = document.createElement("ol");
-    var liA = document.createElement("li");
-    var liB = document.createElement("li");
-    var liC = document.createElement("li");
-    var liD = document.createElement("li");
-    var feedback = document.createElement("p");
+            //elements created to show choices
+            var olEl = document.createElement("ol");
+            olEl.setAttribute("type", "A");
+            answersDiv.appendChild(olEl);
 
-    olEl.setAttribute("type", "A");
-    liA.setAttribute("style", "background-color:goldenrod; padding:5px; margin:5px;");
-    liA.setAttribute("class", "hover-overlay");
-    liB.setAttribute("style", "background-color:goldenrod; padding:5px; margin:5px;");
-    liB.setAttribute("class", "hover-overlay");
-    liC.setAttribute("style", "background-color:goldenrod; padding:5px; margin:5px;");
-    liC.setAttribute("class", "hover-overlay");
-    liD.setAttribute("style", "background-color:goldenrod; padding:5px; margin:5px;");
-    liD.setAttribute("class", "hover-overlay");
-    feedback.setAttribute("style", "color:darkgray");
+            //a list item is created for each choice
+            for (var i = 0; i < quizQuestions[currentQuestion].choices.length; i++) {
 
-    questionDiv.appendChild(olEl);
-    olEl.appendChild(liA);
-    olEl.appendChild(liB);
-    olEl.appendChild(liC);
-    olEl.appendChild(liD);
-    questionDiv.appendChild(feedback);
+                var liEl = document.createElement("li");
+                liEl.setAttribute("style", "background-color:goldenrod; padding:5px; margin:5px;");
+                liEl.setAttribute("class", "hover-overlay");
+                liEl.textContent = quizQuestions[currentQuestion].choices[i];
+                olEl.appendChild(liEl);
 
-    function askQuestion(i) {
-        if (i < quizQuestions.length) {
-            questionTitle.textContent = "Question " + (i + 1);
-            questionP.textContent = quizQuestions[i].question;
-            liA.textContent = quizQuestions[i].choiceA;
-            liB.textContent = quizQuestions[i].choiceB;
-            liC.textContent = quizQuestions[i].choiceC;
-            liD.textContent = quizQuestions[i].choiceD;
+            }
 
-            liA.addEventListener("click", function (event) {
-                console.log(event)
+            //event listener for user selection
+            olEl.addEventListener("click", function (event) {
 
-                if (quizQuestions[i].choiceA === quizQuestions[i].correctAnswer) {
-                    feedback.textContent = "Correct";
+                //if the user selection matches the correct answer
+                if (event.target.innerHTML === quizQuestions[currentQuestion].correctAnswer) {
+                    //tells the user they got it right
+                    feedbackP.textContent = "Correct";
+                    //increases the score
                     score++;
-                    console.log(score);
-                    i++;
-                    return askQuestion(i);
+                    //increases the question index
+                    currentQuestion++;
+                    //runs the function again with the next question
+                    return askQuestion(currentQuestion);
+                    //if the user selection does not match the correct answer
                 } else {
-                    feedback.textContent = "Wrong";
+                    //tells the user they were wrong
+                    feedbackP.textContent = "Wrong";
+                    //subtracts time from their timer
                     secondsLeft = secondsLeft - 10;
-                    i++;
-                    console.log(score);
-
-                    return askQuestion(i);
-                }
-
-            });
-            liB.addEventListener("click", function () {
-                if (quizQuestions[i].choiceB === quizQuestions[i].correctAnswer) {
-                    feedback.textContent = "Correct";
-                    score++;
-                    i++;
-                    console.log(score);
-
-                    return askQuestion(i);
-
-                } else {
-                    feedback.textContent = "Wrong";
-                    secondsLeft = secondsLeft - 10;
-                    i++;
-                    console.log(score);
-
-                    return askQuestion(i);
-
-                }
-            });
-            liC.addEventListener("click", function () {
-                if (quizQuestions[i].choiceC === quizQuestions[i].correctAnswer) {
-                    feedback.textContent = "Correct";
-                    score++;
-                    i++;
-                    console.log(score);
-
-                    return askQuestion(i);
-
-                } else {
-                    feedback.textContent = "Wrong";
-                    secondsLeft = secondsLeft - 10;
-                    i++;
-                    console.log(score);
-
-                    return askQuestion(i);
-
-                }
-            })
-            liD.addEventListener("click", function () {
-                if (quizQuestions[i].choiceD === quizQuestions[i].correctAnswer) {
-                    feedback.textContent = "Correct";
-                    score++;
-                    i++;
-                    console.log(score);
-
-                    return askQuestion(i);
-
-                } else {
-                    feedback.textContent = "Wrong";
-                    secondsLeft = secondsLeft - 10;
-                    i++;
-                    console.log(score);
-
-                    return askQuestion(i);
-
+                    //increases the score index
+                    currentQuestion++;
+                    //runs the function again with the next question
+                    return askQuestion(currentQuestion);
                 };
             });
-
-        }
-        else {
-            console.log("game over")
+            //once there are no more questions left
+        } else {
+            //ends the game
             secondsLeft = 0
+            alert("GAME OVER: Great job! you scored " + score + "!")
+
         };
+
     };
-    askQuestion(i);
+    //call the function with the first question
+    askQuestion(currentQuestion);
 };
 
 
@@ -232,18 +182,3 @@ function runGame() {
 startButton.addEventListener("click", runGame);
 
 
-// and I am presented with a question (for loop?): 
-    // list of questions, multiple choice answers, one of which is correct answer (in an array?)
-    // event listener?: select a multiple choice option
-    //compare selected answer to actual answer
-    //if selected === actual{mark as correct}
-    //if selected != actual {mark as wrong AND 
-    //subtract time from timer}
-//repeat for loop
-
-// WHEN all questions are answered 
-//or the timer reaches 0
-// THEN the game is over: stop game and display score
-    //prompt for initials
-    //save initials into local browser
-    //display high scores screen with initials and score
