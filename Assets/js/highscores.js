@@ -18,6 +18,7 @@ function renderHighScores() {
         var score = highScores[i];
 
         var li = document.createElement("li");
+        li.setAttribute("style", "                 ")
         li.textContent = score.initials + " " + score.score;
         li.setAttribute("data-index", i);
 

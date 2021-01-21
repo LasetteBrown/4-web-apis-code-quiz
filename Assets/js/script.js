@@ -14,35 +14,43 @@ startButton.setAttribute("class", "btn btn-warning");
 startButton.textContent = "START";
 questionDiv.appendChild(startButton);
 
-var secondsLeft = 200;
+var secondsLeft = 300;
 
 var score = 0;
-var allScores = []
+
+var allScores = [];
 // localStorage.getItem("scores", JSON.parse(allScores))
 
 
 function storeScores() {
 
-    var initials = window.prompt("What are your initials?")
+    var initials = window.prompt("GAME OVER: What are your initials?")
+
+    // if (initials = null) {
+    //     initials = "Anonymous";
+    //     return;
+    // }
 
     var userScore = {
         initials: initials,
         score: score,
-    }
+    };
 
-    allScores.push(userScore)
+    allScores.push(userScore);
 
     localStorage.setItem("scores", JSON.stringify(allScores));
 
+
+
     if (initials = true) {
         window.location.href = "highscores.html"
-    }
-}
+    };
+};
 
 //create a timer 
 function startTimer() {
-    questionDiv.removeChild(startButton)
-    secondsLeft = 200
+    questionDiv.removeChild(startButton);
+    secondsLeft = 300;
     // Sets interval in variable
     var timerInterval = setInterval(function () {
         secondsLeft--;
@@ -54,8 +62,8 @@ function startTimer() {
             // Stops execution of action at set interval
             timeRemaining.textContent = "0";
             clearInterval(timerInterval);
-            storeScores()
-        }
+            storeScores();
+        };
 
     }, 1000);
     return secondsLeft;
@@ -64,7 +72,7 @@ function startTimer() {
 //when start is clicked
 function runGame() {
     // THEN a timer starts
-    startTimer()
+    startTimer();
 
     var qOne = {
         question: "What is your name?",
@@ -73,7 +81,7 @@ function runGame() {
         choiceC: "Sir Robin",
         choiceD: "Galihad",
         correctAnswer: "King Aurthur",
-    }
+    };
 
     var qTwo = {
         question: "What is your quest?",
@@ -82,7 +90,7 @@ function runGame() {
         choiceC: "To mock you a second time",
         choiceD: "To run away",
         correctAnswer: "To find the Holy Grail",
-    }
+    };
 
     var qThree = {
         question: "What is your favorite color?",
@@ -92,108 +100,130 @@ function runGame() {
         choiceD: "Blue",
         correctAnswer: "Blue",
 
-    }
-    var quizQuestions = [qOne, qTwo, qThree]
+    };
+    var quizQuestions = [qOne, qTwo, qThree];
 
-    var i = 0
+    var i = 0;
 
 
-    var olEl = document.createElement("ol")
-    var liA = document.createElement("li")
-    var liB = document.createElement("li")
-    var liC = document.createElement("li")
-    var liD = document.createElement("li")
-    var feedback = document.createElement("p")
+    var olEl = document.createElement("ol");
+    var liA = document.createElement("li");
+    var liB = document.createElement("li");
+    var liC = document.createElement("li");
+    var liD = document.createElement("li");
+    var feedback = document.createElement("p");
 
-    olEl.setAttribute("type", "A")
-    liA.setAttribute("style", "background-color:goldenrod;")
-    liB.setAttribute("style", "background-color:goldenrod;")
-    liC.setAttribute("style", "background-color:goldenrod;")
-    liD.setAttribute("style", "background-color:goldenrod;")
-    feedback.setAttribute("style", "color:darkgray")
+    olEl.setAttribute("type", "A");
+    liA.setAttribute("style", "background-color:goldenrod; padding:5px; margin:5px;");
+    liA.setAttribute("class", "hover-overlay");
+    liB.setAttribute("style", "background-color:goldenrod; padding:5px; margin:5px;");
+    liB.setAttribute("class", "hover-overlay");
+    liC.setAttribute("style", "background-color:goldenrod; padding:5px; margin:5px;");
+    liC.setAttribute("class", "hover-overlay");
+    liD.setAttribute("style", "background-color:goldenrod; padding:5px; margin:5px;");
+    liD.setAttribute("class", "hover-overlay");
+    feedback.setAttribute("style", "color:darkgray");
 
-    questionDiv.appendChild(olEl)
-    olEl.appendChild(liA)
-    olEl.appendChild(liB)
-    olEl.appendChild(liC)
-    olEl.appendChild(liD)
-    questionDiv.appendChild(feedback)
+    questionDiv.appendChild(olEl);
+    olEl.appendChild(liA);
+    olEl.appendChild(liB);
+    olEl.appendChild(liC);
+    olEl.appendChild(liD);
+    questionDiv.appendChild(feedback);
 
     function askQuestion(i) {
         if (i < quizQuestions.length) {
             questionTitle.textContent = "Question " + (i + 1);
             questionP.textContent = quizQuestions[i].question;
-            liA.textContent = quizQuestions[i].choiceA
-            liB.textContent = quizQuestions[i].choiceB
-            liC.textContent = quizQuestions[i].choiceC
-            liD.textContent = quizQuestions[i].choiceD
+            liA.textContent = quizQuestions[i].choiceA;
+            liB.textContent = quizQuestions[i].choiceB;
+            liC.textContent = quizQuestions[i].choiceC;
+            liD.textContent = quizQuestions[i].choiceD;
 
-            liA.addEventListener("click", function () {
+            liA.addEventListener("click", function (event) {
+                console.log(event)
+
                 if (quizQuestions[i].choiceA === quizQuestions[i].correctAnswer) {
                     feedback.textContent = "Correct";
                     score++;
-                    i++
+                    console.log(score);
+                    i++;
                     return askQuestion(i);
                 } else {
                     feedback.textContent = "Wrong";
                     secondsLeft = secondsLeft - 10;
-                    i++
+                    i++;
+                    console.log(score);
+
                     return askQuestion(i);
                 }
-            })
+
+            });
             liB.addEventListener("click", function () {
                 if (quizQuestions[i].choiceB === quizQuestions[i].correctAnswer) {
-                    feedback.textContent = "Correct"
-                    score++
-                    i++
+                    feedback.textContent = "Correct";
+                    score++;
+                    i++;
+                    console.log(score);
+
                     return askQuestion(i);
 
                 } else {
-                    feedback.textContent = "Wrong"
-                    secondsLeft = secondsLeft - 10
-                    i++
+                    feedback.textContent = "Wrong";
+                    secondsLeft = secondsLeft - 10;
+                    i++;
+                    console.log(score);
+
                     return askQuestion(i);
 
                 }
-            })
+            });
             liC.addEventListener("click", function () {
                 if (quizQuestions[i].choiceC === quizQuestions[i].correctAnswer) {
-                    feedback.textContent = "Correct"
-                    score++
-                    i++
+                    feedback.textContent = "Correct";
+                    score++;
+                    i++;
+                    console.log(score);
+
                     return askQuestion(i);
 
                 } else {
-                    feedback.textContent = "Wrong"
-                    secondsLeft = secondsLeft - 10
-                    i++
+                    feedback.textContent = "Wrong";
+                    secondsLeft = secondsLeft - 10;
+                    i++;
+                    console.log(score);
+
                     return askQuestion(i);
 
                 }
             })
             liD.addEventListener("click", function () {
                 if (quizQuestions[i].choiceD === quizQuestions[i].correctAnswer) {
-                    feedback.textContent = "Correct"
-                    score++
-                    i++
+                    feedback.textContent = "Correct";
+                    score++;
+                    i++;
+                    console.log(score);
+
                     return askQuestion(i);
 
                 } else {
-                    feedback.textContent = "Wrong"
-                    secondsLeft = secondsLeft - 10
-                    i++
+                    feedback.textContent = "Wrong";
+                    secondsLeft = secondsLeft - 10;
+                    i++;
+                    console.log(score);
+
                     return askQuestion(i);
 
-                }
-            })
+                };
+            });
 
         }
         else {
             console.log("game over")
             secondsLeft = 0
-        }
-    }
-    askQuestion(i)
+        };
+    };
+    askQuestion(i);
 };
 
 
