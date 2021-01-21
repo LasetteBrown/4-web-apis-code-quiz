@@ -12,14 +12,6 @@ header {
     background-color:rgb(20, 0, 2);
 }
 
-#page-title {
-    text-align:center; 
-    color: black;
-    -webkit-text-fill-color: cornsilk; 
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color:  goldenrod;
-}
-
 .card {
     background-color: rgb(20, 0, 2);
     color: cornsilk;
@@ -28,6 +20,18 @@ header {
     margin: 20px;
     margin-top: 30%;
     border-color: blanchedalmond; 
+}
+
+#page-title {
+    text-align:center; 
+    color: black;
+    -webkit-text-fill-color: cornsilk; 
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color:  goldenrod;
+}
+
+#feedback-paragraph{
+    color:darkgray;
 }
 
 .hover-overlay {
