@@ -9,7 +9,7 @@ var feedbackP = document.getElementById("feedback-paragraph");
 var timeRemaining = document.getElementById("time-remaining")
 
 //global variables
-var secondsLeft = 300;
+var secondsLeft = 90;
 var score = 0;
 var allScores = [];
 
@@ -52,7 +52,7 @@ function storeScores() {
 //timer function 
 function startTimer() {
     answersDiv.removeChild(startButton);
-    secondsLeft = 300;
+    secondsLeft = 90;
     // Sets interval in variable
     var timerInterval = setInterval(function () {
         secondsLeft--;
@@ -233,6 +233,7 @@ function runGame() {
                     currentQuestion++;
                     //runs the function again with the next question
                     return askQuestion(currentQuestion);
+
                     //if the user selection does not match the correct answer
                 } else {
                     //tells the user they were wrong
