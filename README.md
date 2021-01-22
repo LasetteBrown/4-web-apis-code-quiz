@@ -1,96 +1,77 @@
 # 4-web-apis-code-quiz
+
 A project to demonstrate my knowledge of Web APIs through a quiz about coding.
-# 04 Web APIs: Code Quiz
 
-## Your Task
-
-At some point in your journey to become a full-stack web developer, you’ll likely be asked to complete a coding assessment&mdash;perhaps as part of an interview process. A typical coding assessment includes both multiple-choice questions and interactive coding challenges. 
-
-To help familiarize you with these tests and allow you to use the skills covered in this unit, this week’s homework invites you to build a timed coding quiz with multiple-choice questions. This app will run in the browser and will feature dynamically updated HTML and CSS powered by JavaScript code that you write. It will have a clean, polished, and responsive user interface. 
-
-This week’s coursework will equip you with all the skills you need to succeed in this assignment.
 
 ## User Story
 
 ```
 AS A coding boot camp student
-I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
+I WANT to take a timed quiz on coding fundamentals that stores high scores
 SO THAT I can gauge my progress compared to my peers
 ```
+## Purpose and Scope
 
-## Acceptance Criteria
+The website is designed to allow the user to take a short quiz about coding knowledge. The quiz is 12 questions long and the user has 90 seconds to answer all of them. 10 seconds are deducted from this time for every wrong answer. At the end of the quiz the user has the option to input their initials, which will be displayed on the high scores page along with their score. On the high scores page, the scores are ranked highest to lowest. 
 
-```
-GIVEN I am taking a code quiz
-WHEN I click the start button
-THEN a timer starts and I am presented with a question
-WHEN I answer a question
-THEN I am presented with another question
-WHEN I answer a question incorrectly
-THEN time is subtracted from the clock
-WHEN all questions are answered or the timer reaches 0
-THEN the game is over
-WHEN the game is over
-THEN I can save my initials and my score
-```
+The high scores page uses local browser storage to store user scores. As such, the user can only see their rank in comparison with other quizes taken on the same browser. Further this feature is limited to computer usage as mobile devices store browser information differently.
 
-## Mock-Up
 
-The following animation demonstrates the application functionality:
+## Installation
 
-![A user clicks through an interactive coding quiz, then enters initials to save the high score before resetting and starting over.](./Assets/04-web-apis-homework-demo.gif)
+No installation is required. This is a web-based ap. Click here to access it:
+https://lasettebrown.github.io/4-web-apis-code-quiz/
 
-## Grading Requirements
+## Instructions
 
-This homework is graded based on the following criteria: 
+When the site loads the user will be presented with the instructions page.
 
-### Technical Acceptance Criteria: 40%
+![Instructions page](./Assets/images/IntroPageCapture.PNG)
 
-* Satisfies all of the preceding acceptance criteria.
+Clicking on 'High Scores' will take the user directly to the high scores page.
+Clicking on the 'START' button will start the quiz. The user will be presented with a multiple choice question with four possible answers.
 
-### Deployment: 32%
+![Quiz page](./Assets/images/QuizPageCapture.PNG)
 
-* Application deployed at live URL.
+Select an answer by clicking on it. Once an answer is selected, the quiz will display whether that answer was 'Correct' or 'Wrong' and move on the the next question.
 
-* Application loads with no errors.
+![Wrong Answer](./Assets/images/WrongAnswerCapture.PNG)
+![Correct Answer](./Assets/images/CorrectAnswerCapture.PNG)
 
-* Application GitHub URL submitted.
+Once the user has answered all 12 questions, or if the timer runs out, the quiz is over. A window alert will display showing the user score. Then a prompt will ask for the user's initials, and the page will be redirected to the High Scores page.
 
-* GitHub repository contains application code.
+The users initials will be displayed alongside their score, ranked among all quiz scores.
 
-### Application Quality: 15%
+![High Scores](./Assets/images/HighScoresCapture.PNG)
 
-* Application user experience is intuitive and easy to navigate.
+Clicking on either 'Return to Quiz' or the 'PLAY AGAIN?' button will redirect the user back to the quiz page.
 
-* Application user interface style is clean and polished.
+## Built with
 
-* Application resembles the mock-up functionality provided in the homework instructions.
+HTML
+CSS
+Bootstrap
+JavaScript
 
-### Repository Quality: 13%
+## Authors
 
-* Repository has a unique name.
+All pages of this site were written by Lasette brown. Bootstrap was used for certain design elements. The background image is by Joshua Sortino and was obtained through Unsplash. Find Joshua Sortino's profile page here: https://unsplash.com/@sortino?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
 
-* Repository follows best practices for file structure and naming conventions.
 
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
+## Thank yous
 
-* Repository contains multiple descriptive commit messages.
+Thank you to my tutor, Kelly Gowing, and my friend, Eliot Kurfman for helping me debug mycode!
 
-* Repository contains quality readme file with description, screenshot, and link to deployed application.
+## License
 
-## Review
+The content of this website is copyrighted. Please do not use the content without permission.
+© 2021 Lasette Brown. All Rights Reserved.
 
-You are required to submit BOTH of the following for review:
 
-* The URL of the functional, deployed application.
 
-* The URL of the GitHub repository, with a unique name and a readme describing the project.
 
----
 
-© 2021 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
-<span>Photo by <a href="https://unsplash.com/@sortino?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Joshua Sortino</a> on <a href="https://unsplash.com/s/photos/coding?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
 
-<span>Photo by <a href="https://unsplash.com/@markusspiske?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Markus Spiske</a> on <a href="https://unsplash.com/s/photos/matrix?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
 
-<span>Photo by <a href="https://unsplash.com/@anphotos?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Akshay Nanavati</a> on <a href="https://unsplash.com/s/photos/matrix?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+
+

@@ -30,7 +30,13 @@ function storeScores() {
 
     //make sure they have entered initials
     if (initials === null) {
-        initials = "anonymous"
+        var confirmCancel = window.confirm("Are you sure? Your initials will be recorded with your score on the High Scores page. Click 'OK' to enter your initials");
+        if (confirmCancel === true) {
+            return storeScores()
+        } else {
+            initials = "anonymous"
+        }
+
 
     };
 
@@ -264,7 +270,7 @@ function runGame() {
 
 
 
-//event listener: click on start
+//event listener: click on start runs the game
 startButton.addEventListener("click", runGame);
 
 
