@@ -11,7 +11,10 @@ var timeRemaining = document.getElementById("time-remaining")
 //global variables
 var secondsLeft = 90;
 var score = 0;
+
 var allScores = [];
+allScores = JSON.parse(localStorage.getItem("scores"));
+console.log(allScores)
 
 //create a start button
 var startButton = document.createElement("button");
@@ -22,31 +25,30 @@ answersDiv.appendChild(startButton);
 
 // a function for the end of the game: collects initials, stores score, and redirects
 function storeScores() {
-    //telling the user that the game is over and asking them for their initials
-    var initials = window.prompt("What are your initials?")
+    //asking them for their initials
+    var initials = window.prompt("What are your initials?");
 
     //make sure they have entered initials
     if (initials === null) {
-        alert("Your initials will be used to record your score and rank. Please enter your initials.")
-        return storeScores()
+        initials = "anonymous"
 
-        //if they have entered initials
-    } else {
-        //create an object to store their score and initials
-        var userScore = {
-            initials: initials,
-            score: score,
-        };
+    };
 
-        //push their score into the allscores array
-        allScores.push(userScore);
+    //if they have entered initials
+    var userScore = {
+        initials: initials,
+        score: score,
+    };
 
-        //store the array in local storage
-        localStorage.setItem("scores", JSON.stringify(allScores));
+    //push their score into the allscores array
+    allScores.push(userScore);
 
-        //and redirect to the high scores page
-        window.location.href = "highscores.html"
-    }
+    //store the array in local storage
+    localStorage.setItem("scores", JSON.stringify(allScores));
+
+    //and redirect to the high scores page
+    window.location.href = "highscores.html"
+
 };
 
 //timer function 
@@ -64,6 +66,8 @@ function startTimer() {
             // Stops execution of action at end of game
             timeRemaining.textContent = "0";
             clearInterval(timerInterval);
+            alert("GAME OVER: Great job! you scored " + score + "!")
+
             storeScores();
         };
 
@@ -115,7 +119,7 @@ function runGame() {
         question: "What does CSS stand for?",
         choices: ["Cascading Style Sheet",
             "Creative Style Sheet",
-            "Colorful Stlye Syntax",
+            "Colorful Style Syntax",
             "Cascading Style Solutions"],
         correctAnswer: "Cascading Style Sheet",
 
@@ -250,7 +254,6 @@ function runGame() {
         } else {
             //ends the game
             secondsLeft = 0
-            alert("GAME OVER: Great job! you scored " + score + "!")
 
         };
 
