@@ -28,7 +28,7 @@ function renderHighScores(sortedScores) {
 // This function is being called below and will run when the page loads.
 function init() {
     // Get stored scores from localStorage
-    var storedScores = JSON.parse(localStorage.getItem("scores"));
+    var storedScores = JSON.parse(window.localStorage.getItem("scores")) || [];
 
     // If scores were retrieved from localStorage, update the scores array to it
     if (storedScores !== null) {

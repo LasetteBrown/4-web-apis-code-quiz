@@ -50,7 +50,7 @@ function storeScores() {
     allScores.push(userScore);
 
     //store the array in local storage
-    localStorage.setItem("scores", JSON.stringify(allScores));
+    window.localStorage.setItem("scores", JSON.stringify(allScores));
 
     //and redirect to the high scores page
     window.location.href = "highscores.html"
