@@ -13,8 +13,10 @@ var secondsLeft = 90;
 var score = 0;
 
 var allScores = [];
-allScores = JSON.parse(localStorage.getItem("scores"));
-console.log(allScores)
+
+if (localStorage.getItem === "Scores") {
+    allScores = JSON.parse(localStorage.getItem("scores"));
+}
 
 //create a start button
 var startButton = document.createElement("button");
